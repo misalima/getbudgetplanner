@@ -437,7 +437,7 @@ export default function InputSection() {
             </div>
           </div>
 
-          <div className="rounded-lg border p-4">
+          <div className="rounded-lg md:border md:p-4">
             <div className="flex items-center justify-between">
               <div className="space-y-0.5">
                 <Label htmlFor="customize-toggle">Customize Percentages</Label>
@@ -476,7 +476,7 @@ export default function InputSection() {
           </div>
         </CardContent>
         <CardFooter>
-          <Button size="lg" className="w-full hover:cursor-pointer">
+          <Button size="lg" className="text-xl h-16 rounded-2xl w-full hover:cursor-pointer">
             Calculate My Budget
           </Button>
         </CardFooter>

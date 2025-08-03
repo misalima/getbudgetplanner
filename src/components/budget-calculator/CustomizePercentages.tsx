@@ -60,7 +60,7 @@ export default function CustomizePercentages({
       {/* Quick Presets */}
       <div className="space-y-2">
         <Label className="text-sm font-medium">Quick Presets</Label>
-        <div className="grid grid-cols-2 gap-2">
+        <div className="grid md:grid-cols-2 gap-1">
           {quickPresets.map((preset) => (
             <Button
               key={preset.name}
