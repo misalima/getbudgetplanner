@@ -2,6 +2,7 @@
 import { useState } from "react";
 import InputSection from "@/components/budget-calculator/InputSection";
 import ResultsSection from "@/components/budget-calculator/ResultsSection";
+import FAQSection from "@/components/budget-calculator/FAQSection";
 
 export default function BudgetCalculatorPage() {
   const [percentages, setPercentages] = useState({
@@ -38,7 +39,7 @@ export default function BudgetCalculatorPage() {
         <section className="mb-8">
           <div className="max-w-4xl mx-auto text-center">
             <h2
-              className="text-xl font-semibold mb-3"
+              className="text-xl font-semibold mb-3 md:text-2xl"
               style={{ color: "var(--title)" }}
             >
               How It Works
@@ -84,6 +85,9 @@ export default function BudgetCalculatorPage() {
             income={income}
           />
         )}
+
+        {/* FAQ Section */}
+        <FAQSection />
       </div>
     </main>
   );

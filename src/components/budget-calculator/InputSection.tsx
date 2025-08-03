@@ -312,13 +312,13 @@ export default function InputSection({
 
   return (
     <section className="mb-8">
-      <Card className="max-w-4xl mx-auto md:p-6">
+      <Card className="max-w-4xl mx-auto md:p-6 lg:py-10">
         <CardHeader className="pb-4">
-          <CardTitle className="text-lg font-bold text-title text-center">
+          <CardTitle className="text-2xl font-bold text-primary text-center">
             50/30/20 Calculator
           </CardTitle>
-          <CardDescription className="text-center text-sm">
-            Enter your income and expenses to get started.
+          <CardDescription className="text-center text-base mt-4">
+            Enter your income to get started.
           </CardDescription>
         </CardHeader>
         <CardContent className="space-y-6">
