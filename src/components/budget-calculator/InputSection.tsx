@@ -61,7 +61,9 @@ export default function InputSection({
   const [showCustom, setShowCustom] = React.useState(false);
   const [expensesExpanded, setExpensesExpanded] = React.useState(false);
   const [expenses, setExpenses] = React.useState<Expense[]>([]);
+
   const [income, setLocalIncome] = React.useState<number>(0);
+  const [incomeError, setIncomeError] = React.useState<string>("");
 
   const [inputValues, setInputValues] = React.useState({
     needs: "50",
@@ -247,8 +249,34 @@ export default function InputSection({
     );
   };
 
+  const validateIncome = () => {
+    if (!income || income <= 0) {
+      if (income === 0 || !income) {
+        setIncomeError("Please enter your monthly income");
+      } else if (income < 0) {
+        setIncomeError("Income must be a positive number");
+      }
+      return false;
+    }
+    setIncomeError("");
+    return true;
+  };
+
+  const handleIncomeChange = (value: string) => {
+    const numValue = Number(value);
+    setLocalIncome(numValue);
+
+    // Clear error when user starts typing
+    if (incomeError) {
+      setIncomeError("");
+    }
+  };
+
   const handleCalculate = () => {
-    if (!validateExpenses() || income <= 0) {
+    const isIncomeValid = validateIncome();
+    const areExpensesValid = validateExpenses();
+
+    if (!isIncomeValid || !areExpensesValid) {
       return;
     }
 
@@ -304,11 +332,23 @@ export default function InputSection({
                 id="income"
                 type="number"
                 placeholder="your income"
-                onChange={(e) => setLocalIncome(Number(e.target.value))}
-                className="pl-12 py-6 text-gray-800 font-semibold text-center"
+                onChange={(e) => handleIncomeChange(e.target.value)}
+                className={`pl-12 py-6 text-gray-800 font-semibold text-center ${
+                  incomeError ? "border-red-500 focus:border-red-500" : ""
+                }`}
                 style={{ fontSize: "1.4rem" }}
+                aria-invalid={!!incomeError}
+                aria-describedby={incomeError ? "income-error" : undefined}
               />
             </div>
+            {incomeError && (
+              <p
+                id="income-error"
+                className="text-sm text-red-600 text-center mt-1"
+              >
+                {incomeError}
+              </p>
+            )}
           </div>
 
           <div className="space-y-2">
