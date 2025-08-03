@@ -9,6 +9,7 @@ import {
   Info,
 } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
+import PieChartSection from "./PieChartSection";
 
 interface ResultsSectionProps {
   totals: { needs: number; wants: number; savings: number };
@@ -201,16 +202,11 @@ export default function ResultsSection({
         <div className="grid lg:grid-cols-2 gap-8 items-center">
           {/* Pie Chart */}
           <div className="flex justify-center">
-            <div className="w-72 h-72 rounded-full border-8 border-muted flex items-center justify-center bg-muted/20">
-              <div className="text-center">
-                <div className="text-xl font-bold text-muted-foreground mb-2">
-                  Pie Chart
-                </div>
-                <div className="text-sm text-muted-foreground">
-                  Interactive chart coming soon
-                </div>
-              </div>
-            </div>
+            <PieChartSection
+              income={income}
+              percentages={percentages}
+              totals={totals}
+            />
           </div>
 
           {/* Budget Breakdown */}
