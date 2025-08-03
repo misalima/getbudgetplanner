@@ -27,26 +27,41 @@ interface Expense {
   name: string;
   amount: string;
   category: string;
-  customCategoryName: string;
   errors: {
     name?: string;
     amount?: string;
     category?: string;
-    customCategoryName?: string;
   };
 }
 
-export default function InputSection() {
+interface InputSectionProps {
+  percentages: PercentageState;
+  setPercentages: (
+    value: PercentageState | ((prev: PercentageState) => PercentageState)
+  ) => void;
+  expenseAmounts: { needs: number; wants: number; savings: number };
+  setExpenseAmounts: (value: {
+    needs: number;
+    wants: number;
+    savings: number;
+  }) => void;
+  income: number;
+  setIncome: (value: number) => void;
+  setShowResults: (value: boolean) => void;
+}
+
+export default function InputSection({
+  percentages,
+  setPercentages,
+  expenseAmounts,
+  setExpenseAmounts,
+  setIncome,
+  setShowResults,
+}: InputSectionProps) {
   const [showCustom, setShowCustom] = React.useState(false);
   const [expensesExpanded, setExpensesExpanded] = React.useState(false);
   const [expenses, setExpenses] = React.useState<Expense[]>([]);
-
-  // Percentage state management
-  const [percentages, setPercentages] = React.useState<PercentageState>({
-    needs: 50,
-    wants: 30,
-    savings: 20,
-  });
+  const [income, setLocalIncome] = React.useState<number>(0);
 
   const [inputValues, setInputValues] = React.useState({
     needs: "50",
@@ -167,7 +182,6 @@ export default function InputSection() {
         name: "",
         amount: "",
         category: "Needs",
-        customCategoryName: "",
         errors: {},
       },
     ]);
@@ -212,24 +226,70 @@ export default function InputSection() {
           errors.category = "Required";
           valid = false;
         }
-        if (e.category === "Custom" && !e.customCategoryName.trim()) {
-          errors.customCategoryName = "Required";
-          valid = false;
-        }
         return { ...e, errors };
       })
     );
     return valid;
   };
 
+  const calculateTotals = () => {
+    return expenses.reduce(
+      (totals, expense) => {
+        const category = expense.category.toLowerCase();
+        if (category === "needs") totals.needs += Number(expense.amount) || 0;
+        else if (category === "wants")
+          totals.wants += Number(expense.amount) || 0;
+        else if (category === "savings")
+          totals.savings += Number(expense.amount) || 0;
+        return totals;
+      },
+      { needs: 0, wants: 0, savings: 0 }
+    );
+  };
+
+  const handleCalculate = () => {
+    if (!validateExpenses() || income <= 0) {
+      return;
+    }
+
+    setIncome(income);
+
+    const {
+      needs: needsTotal,
+      wants: wantsTotal,
+      savings: savingsTotal,
+    } = calculateTotals();
+
+    // Update the expense amounts state
+    setExpenseAmounts({
+      needs: needsTotal,
+      wants: wantsTotal,
+      savings: savingsTotal,
+    });
+
+    // Show the results section
+    setShowResults(true);
+
+    // Scroll to results section after a brief delay to allow rendering
+    setTimeout(() => {
+      const resultsSection = document.getElementById("results-section");
+      if (resultsSection) {
+        resultsSection.scrollIntoView({
+          behavior: "smooth",
+          block: "start",
+        });
+      }
+    }, 100);
+  };
+
   return (
-    <section className="mb-12">
-      <Card className="max-w-3xl mx-auto md:p-8">
-        <CardHeader>
-          <CardTitle className="text-xl font-bold text-title text-center">
+    <section className="mb-8">
+      <Card className="max-w-4xl mx-auto md:p-6">
+        <CardHeader className="pb-4">
+          <CardTitle className="text-lg font-bold text-title text-center">
             50/30/20 Calculator
           </CardTitle>
-          <CardDescription className="text-center">
+          <CardDescription className="text-center text-sm">
             Enter your income and expenses to get started.
           </CardDescription>
         </CardHeader>
@@ -244,6 +304,7 @@ export default function InputSection() {
                 id="income"
                 type="number"
                 placeholder="your income"
+                onChange={(e) => setLocalIncome(Number(e.target.value))}
                 className="pl-12 py-6 text-gray-800 font-semibold text-center"
                 style={{ fontSize: "1.4rem" }}
               />
@@ -367,7 +428,6 @@ export default function InputSection() {
                           <SelectItem value="Needs">Needs</SelectItem>
                           <SelectItem value="Wants">Wants</SelectItem>
                           <SelectItem value="Savings">Savings</SelectItem>
-                          <SelectItem value="Custom">Custom</SelectItem>
                         </SelectContent>
                       </Select>
                       {expense.errors.category && (
@@ -377,37 +437,6 @@ export default function InputSection() {
                         >
                           {expense.errors.category}
                         </p>
-                      )}
-
-                      {expense.category === "Custom" && (
-                        <div className="mt-2">
-                          <Input
-                            type="text"
-                            placeholder="Custom category name"
-                            value={expense.customCategoryName}
-                            onChange={(e) =>
-                              updateExpense(
-                                expense.id,
-                                "customCategoryName",
-                                e.target.value
-                              )
-                            }
-                            aria-invalid={!!expense.errors.customCategoryName}
-                            aria-describedby={
-                              expense.errors.customCategoryName
-                                ? `error-custom-category-${expense.id}`
-                                : undefined
-                            }
-                          />
-                          {expense.errors.customCategoryName && (
-                            <p
-                              id={`error-custom-category-${expense.id}`}
-                              className="text-xs text-red-600"
-                            >
-                              {expense.errors.customCategoryName}
-                            </p>
-                          )}
-                        </div>
                       )}
                     </div>
 
@@ -476,7 +505,11 @@ export default function InputSection() {
           </div>
         </CardContent>
         <CardFooter>
-          <Button size="lg" className="text-xl h-16 rounded-2xl w-full hover:cursor-pointer">
+          <Button
+            size="lg"
+            className="text-xl h-12 md:rounded-lg rounded-2xl w-full hover:cursor-pointer"
+            onClick={handleCalculate}
+          >
             Calculate My Budget
           </Button>
         </CardFooter>
