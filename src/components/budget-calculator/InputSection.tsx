@@ -20,6 +20,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import CustomizePercentages, { PercentageState } from "./CustomizePercentages";
 
 interface Expense {
   id: number;
@@ -39,6 +40,120 @@ export default function InputSection() {
   const [showCustom, setShowCustom] = React.useState(false);
   const [expensesExpanded, setExpensesExpanded] = React.useState(false);
   const [expenses, setExpenses] = React.useState<Expense[]>([]);
+
+  // Percentage state management
+  const [percentages, setPercentages] = React.useState<PercentageState>({
+    needs: 50,
+    wants: 30,
+    savings: 20,
+  });
+
+  const [inputValues, setInputValues] = React.useState({
+    needs: "50",
+    wants: "30",
+    savings: "20",
+  });
+
+  // Percentage methods
+  const handlePercentageInputChange = (
+    category: keyof PercentageState,
+    value: string
+  ) => {
+    // Allow empty string or valid numbers
+    if (value === "" || /^\d*\.?\d*$/.test(value)) {
+      setInputValues((prev) => ({ ...prev, [category]: value }));
+
+      // Update percentage if it's a valid number
+      const numValue = parseFloat(value);
+      if (!isNaN(numValue) && numValue >= 0 && numValue <= 100) {
+        setPercentages((prev) => ({ ...prev, [category]: numValue }));
+      } else if (value === "") {
+        setPercentages((prev) => ({ ...prev, [category]: 0 }));
+      }
+    }
+  };
+
+  const handlePercentageInputBlur = (category: keyof PercentageState) => {
+    const value = inputValues[category];
+    if (value === "" || isNaN(parseFloat(value))) {
+      // Reset to current percentage if invalid
+      setInputValues((prev) => ({
+        ...prev,
+        [category]: percentages[category].toString(),
+      }));
+    }
+  };
+
+  const resetPercentagesToDefault = () => {
+    const defaultValues = { needs: 50, wants: 30, savings: 20 };
+    setPercentages(defaultValues);
+    setInputValues({
+      needs: "50",
+      wants: "30",
+      savings: "20",
+    });
+  };
+
+  const balanceBudget = () => {
+    const total = percentages.needs + percentages.wants + percentages.savings;
+    if (total === 0) {
+      resetPercentagesToDefault();
+      return;
+    }
+
+    // Proportionally adjust to make total = 100
+    const factor = 100 / total;
+    const newPercentages = {
+      needs: Math.round(percentages.needs * factor),
+      wants: Math.round(percentages.wants * factor),
+      savings: Math.round(percentages.savings * factor),
+    };
+
+    // Ensure total is exactly 100 by adjusting the largest category
+    const newTotal =
+      newPercentages.needs + newPercentages.wants + newPercentages.savings;
+    if (newTotal !== 100) {
+      const diff = 100 - newTotal;
+      const largest = Object.entries(newPercentages).reduce(
+        (max, [key, value]) =>
+          value > newPercentages[max as keyof PercentageState]
+            ? (key as keyof PercentageState)
+            : max,
+        "needs" as keyof PercentageState
+      );
+      newPercentages[largest] += diff;
+    }
+
+    setPercentages(newPercentages);
+    setInputValues({
+      needs: newPercentages.needs.toString(),
+      wants: newPercentages.wants.toString(),
+      savings: newPercentages.savings.toString(),
+    });
+  };
+
+  const applyPreset = (preset: {
+    needs: number;
+    wants: number;
+    savings: number;
+  }) => {
+    setPercentages(preset);
+    setInputValues({
+      needs: preset.needs.toString(),
+      wants: preset.wants.toString(),
+      savings: preset.savings.toString(),
+    });
+  };
+
+  // Handle toggle change with reset functionality
+  const handleCustomToggleChange = (checked: boolean) => {
+    setShowCustom(checked);
+
+    // If turning off customization, reset to default values
+    if (!checked) {
+      resetPercentagesToDefault();
+    }
+  };
 
   const toggleExpenses = () => {
     setExpensesExpanded(!expensesExpanded);
@@ -111,21 +226,26 @@ export default function InputSection() {
     <section className="mb-12">
       <Card className="max-w-3xl mx-auto md:p-8">
         <CardHeader>
-          <CardTitle className="text-lg">Your Financials</CardTitle>
-          <CardDescription>
+          <CardTitle className="text-xl font-bold text-title text-center">
+            50/30/20 Calculator
+          </CardTitle>
+          <CardDescription className="text-center">
             Enter your income and expenses to get started.
           </CardDescription>
         </CardHeader>
         <CardContent className="space-y-6">
-          <div className="space-y-2">
-            <Label htmlFor="income">Monthly Income</Label>
-            <div className="relative">
-              <DollarSign className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground" />
+          <div className="space-y-2 flex flex-col items-center">
+            <Label htmlFor="income" className="text-center">
+              Monthly Income
+            </Label>
+            <div className="relative w-64">
+              <DollarSign className="absolute left-3 top-1/2 -translate-y-1/2 h-6 w-6 text-muted-foreground" />
               <Input
                 id="income"
                 type="number"
-                placeholder="Enter your monthly income"
-                className="pl-10"
+                placeholder="your income"
+                className="pl-12 py-6 text-gray-800 font-semibold text-center"
+                style={{ fontSize: "1.4rem" }}
               />
             </div>
           </div>
@@ -317,24 +437,43 @@ export default function InputSection() {
             </div>
           </div>
 
-          <div className="flex items-center justify-between rounded-lg border p-4">
-            <div className="space-y-0.5">
-              <Label htmlFor="customize-toggle">Customize Percentages</Label>
-              <p className="text-sm text-muted-foreground">
-                Adjust the 50/30/20 rule to fit your goals.
-              </p>
+          <div className="rounded-lg border p-4">
+            <div className="flex items-center justify-between">
+              <div className="space-y-0.5">
+                <Label htmlFor="customize-toggle">Customize Percentages</Label>
+                <p className="text-sm text-muted-foreground">
+                  Adjust the 50/30/20 rule to fit your goals.
+                </p>
+              </div>
+              <Switch
+                id="customize-toggle"
+                checked={showCustom}
+                onCheckedChange={handleCustomToggleChange}
+                className="hover:cursor-pointer"
+                aria-controls="percentages-section"
+              />
             </div>
-            <Switch
-              id="customize-toggle"
-              checked={showCustom}
-              onCheckedChange={setShowCustom}
-              className="hover:cursor-pointer"
-            />
+            <div
+              id="percentages-section"
+              className={`overflow-hidden transition-all duration-300 ease-in-out ${
+                showCustom
+                  ? "max-h-[800px] opacity-100 mt-4"
+                  : "max-h-0 opacity-0 mt-0"
+              }`}
+            >
+              <div className="py-4">
+                <CustomizePercentages
+                  percentages={percentages}
+                  inputValues={inputValues}
+                  onInputChange={handlePercentageInputChange}
+                  onInputBlur={handlePercentageInputBlur}
+                  onResetToDefault={resetPercentagesToDefault}
+                  onBalanceBudget={balanceBudget}
+                  onApplyPreset={applyPreset}
+                />
+              </div>
+            </div>
           </div>
-
-          {showCustom && (
-            <div>Customization UI will go here (sliders, etc.)</div>
-          )}
         </CardContent>
         <CardFooter>
           <Button size="lg" className="w-full hover:cursor-pointer">

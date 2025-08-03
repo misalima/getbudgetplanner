@@ -16,6 +16,25 @@ export default function BudgetCalculatorPage() {
           insights and take control of your money.
         </p>
       </header>
+
+      <section className="mb-12">
+        <div className="max-w-3xl mx-auto text-center">
+          <h2
+            className="text-2xl font-semibold mb-4"
+            style={{ color: "var(--title)" }}
+          >
+            How It Works
+          </h2>
+          <p className="text-gray-600 leading-relaxed">
+            The 50/30/20 rule is a simple budgeting method that divides your
+            after-tax income into three categories: 50% for needs (rent,
+            groceries, utilities), 30% for wants (entertainment, dining out),
+            and 20% for savings and debt repayment. Enter your monthly income
+            below to see how much you should allocate to each category.
+          </p>
+        </div>
+      </section>
+
       <InputSection />
     </main>
   );
