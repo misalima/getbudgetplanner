@@ -35,6 +35,13 @@ export default function BudgetCalculatorPage() {
           </p>
         </header>
 
+        {/* Ad Placeholder - Above the Fold */}
+        <div className="flex justify-center mb-8">
+          <div className="w-full max-w-3xl h-20 rounded-lg border-2 border-dashed border-slate-300 dark:border-slate-600 bg-slate-50 dark:bg-slate-800 flex items-center justify-center text-sm font-medium text-slate-500 dark:text-slate-400 transition-colors duration-200 hover:bg-slate-100 dark:hover:bg-slate-700">
+            <span className="opacity-60">Advertisement</span>
+          </div>
+        </div>
+
         {/* How It Works - More Compact */}
         <section className="mb-8">
           <div className="max-w-4xl mx-auto text-center">
@@ -85,6 +92,13 @@ export default function BudgetCalculatorPage() {
             income={income}
           />
         )}
+
+        {/* Ad Placeholder - Before FAQ */}
+        <div className="flex justify-center mt-12 mb-8">
+          <div className="w-full max-w-3xl h-20 rounded-lg border-2 border-dashed border-slate-300 dark:border-slate-600 bg-slate-50 dark:bg-slate-800 flex items-center justify-center text-sm font-medium text-slate-500 dark:text-slate-400 transition-colors duration-200 hover:bg-slate-100 dark:hover:bg-slate-700">
+            <span className="opacity-60">Advertisement</span>
+          </div>
+        </div>
 
         {/* FAQ Section */}
         <FAQSection />
