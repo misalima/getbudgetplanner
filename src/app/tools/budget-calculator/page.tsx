@@ -53,8 +53,9 @@ export default function BudgetCalculatorPage() {
             </h2>
             <p className="text-gray-600 text-sm md:text-base leading-relaxed mb-4">
               Take control of your finances with our simple budget calculator.
-              Just enter your monthly income, and we'll instantly show you how
-              to allocate your money using the proven 50/30/20 budgeting method.
+              Just enter your monthly income, and we&apos;ll instantly show you
+              how to allocate your money using the proven 50/30/20 budgeting
+              method.
             </p>
             <p className="text-gray-600 text-sm md:text-base leading-relaxed">
               The 50/30/20 rule divides your after-tax income into three
@@ -84,7 +85,6 @@ export default function BudgetCalculatorPage() {
           setIncome={setIncome}
           percentages={percentages}
           setPercentages={setPercentages}
-          expenseAmounts={expenseAmounts}
           setExpenseAmounts={setExpenseAmounts}
           setShowResults={setShowResults}
         />
@@ -108,9 +108,7 @@ export default function BudgetCalculatorPage() {
         {/* Understanding the 50/30/20 Rule */}
         <section className="mb-12 mt-14">
           <div className="max-w-4xl mx-auto">
-            <h2
-              className="text-xl md:text-2xl text-gray-700 font-semibold text-center mb-6"
-            >
+            <h2 className="text-xl md:text-2xl text-gray-700 font-semibold text-center mb-6">
               Understanding the 50/30/20 Rule
             </h2>
 
@@ -127,7 +125,7 @@ export default function BudgetCalculatorPage() {
                     50% - Needs
                   </h3>
                   <p className="text-gray-600 dark:text-gray-300 text-sm leading-relaxed">
-                    Essential expenses you can't avoid: housing, utilities,
+                    Essential expenses you can&apos;t avoid: housing, utilities,
                     groceries, transportation, minimum debt payments, insurance,
                     and healthcare. These are your non-negotiable costs.
                   </p>
@@ -140,7 +138,8 @@ export default function BudgetCalculatorPage() {
                   <p className="text-gray-600 dark:text-gray-300 text-sm leading-relaxed">
                     Lifestyle choices and discretionary spending: dining out,
                     entertainment, hobbies, subscriptions, shopping, and travel.
-                    These enhance your quality of life but aren't essential.
+                    These enhance your quality of life but aren&apos;t
+                    essential.
                   </p>
                 </div>
 

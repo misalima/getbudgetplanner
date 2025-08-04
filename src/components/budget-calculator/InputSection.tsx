@@ -39,7 +39,6 @@ interface InputSectionProps {
   setPercentages: (
     value: PercentageState | ((prev: PercentageState) => PercentageState)
   ) => void;
-  expenseAmounts: { needs: number; wants: number; savings: number };
   setExpenseAmounts: (value: {
     needs: number;
     wants: number;
@@ -53,7 +52,6 @@ interface InputSectionProps {
 export default function InputSection({
   percentages,
   setPercentages,
-  expenseAmounts,
   setExpenseAmounts,
   setIncome,
   setShowResults,
@@ -387,7 +385,7 @@ export default function InputSection({
               }`}
             >
               <div className="space-y-4 max-h-[400px] overflow-y-auto">
-                {expenses.map((expense, idx) => (
+                {expenses.map((expense) => (
                   <div
                     key={expense.id}
                     className="flex flex-col md:flex-row md:items-center md:space-x-4 p-4 rounded-md border bg-muted"
