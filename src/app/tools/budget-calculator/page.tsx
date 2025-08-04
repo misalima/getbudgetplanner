@@ -19,12 +19,12 @@ export default function BudgetCalculatorPage() {
   const [showResults, setShowResults] = useState(false);
 
   return (
-    <main className="min-h-screen">
+    <main className="min-h-screen mt-8">
       <div className="container mx-auto px-4 py-6 max-w-7xl">
         {/* Compact Header */}
         <header className="text-center mb-8">
           <h1
-            className="text-3xl md:text-4xl font-bold mb-3"
+            className="text-3xl md:text-4xl font-bold mb-6"
             style={{ color: "var(--title)" }}
           >
             Budget Calculator (50/30/20 Rule)

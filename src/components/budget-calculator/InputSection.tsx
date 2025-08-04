@@ -302,9 +302,18 @@ export default function InputSection({
     setTimeout(() => {
       const resultsSection = document.getElementById("results-section");
       if (resultsSection) {
-        resultsSection.scrollIntoView({
+        // Get the height of the sticky header
+        const header = document.querySelector("header");
+        const headerHeight = header ? header.clientHeight : 0;
+
+        // Get the top position of the results section relative to the document
+        const elementTop =
+          resultsSection.getBoundingClientRect().top + window.pageYOffset;
+
+        // Scroll to the position minus the header height
+        window.scrollTo({
+          top: elementTop - headerHeight,
           behavior: "smooth",
-          block: "start",
         });
       }
     }, 100);
