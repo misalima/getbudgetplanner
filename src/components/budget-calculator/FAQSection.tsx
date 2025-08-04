@@ -41,7 +41,7 @@ const faqData: FAQItem[] = [
 
 export default function FAQSection() {
   return (
-    <section className="mt-12 mb-8">
+    <section className="mt-12 pb-20">
       <div className="max-w-4xl mx-auto px-4">
         {/* Section Header */}
         <div className="text-center mb-6">
@@ -60,32 +60,38 @@ export default function FAQSection() {
         </div>
 
         {/* FAQ Accordion */}
-        <Accordion type="multiple" className="w-full space-y-2">
-          {faqData.map((item, index) => (
-            <AccordionItem
-              key={index}
-              value={`item-${index}`}
-              className="border-2 rounded-lg px-4 py-1 transition-all duration-200 hover:shadow-md hover:border-opacity-80"
-              style={{
-                borderColor: "var(--border)",
-                backgroundColor: "var(--card)",
-              }}
-            >
-              <AccordionTrigger
-                className="text-left text-base font-semibold hover:no-underline py-3 cursor-pointer transition-colors duration-200 hover:opacity-80"
-                style={{ color: "var(--title)" }}
+        <div className="overflow-visible">
+          <Accordion type="multiple" className="w-full space-y-2">
+            {faqData.map((item, index) => (
+              <div
+                key={index}
+                className="border-2 rounded-lg transition-all duration-200 hover:shadow-md hover:border-opacity-80"
+                style={{
+                  borderColor: "var(--border)",
+                  backgroundColor: "var(--card)",
+                }}
               >
-                {item.question}
-              </AccordionTrigger>
-              <AccordionContent
-                className="text-sm leading-relaxed font-medium pb-3 pt-1"
-                style={{ color: "var(--muted-foreground)" }}
-              >
-                {item.answer}
-              </AccordionContent>
-            </AccordionItem>
-          ))}
-        </Accordion>
+                <AccordionItem
+                  value={`item-${index}`}
+                  className="border-none px-4 py-1"
+                >
+                  <AccordionTrigger
+                    className="text-left text-base font-semibold hover:no-underline py-3 cursor-pointer transition-colors duration-200 hover:opacity-80"
+                    style={{ color: "var(--title)" }}
+                  >
+                    {item.question}
+                  </AccordionTrigger>
+                  <AccordionContent
+                    className="text-sm leading-relaxed font-medium pb-3 pt-1"
+                    style={{ color: "var(--muted-foreground)" }}
+                  >
+                    {item.answer}
+                  </AccordionContent>
+                </AccordionItem>
+              </div>
+            ))}
+          </Accordion>
+        </div>
       </div>
     </section>
   );
