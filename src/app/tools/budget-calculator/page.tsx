@@ -51,6 +51,11 @@ export default function BudgetCalculatorPage() {
             >
               How It Works
             </h2>
+            <p className="text-gray-600 text-sm md:text-base leading-relaxed mb-4">
+              Take control of your finances with our simple budget calculator.
+              Just enter your monthly income, and we'll instantly show you how
+              to allocate your money using the proven 50/30/20 budgeting method.
+            </p>
             <p className="text-gray-600 text-sm md:text-base leading-relaxed">
               The 50/30/20 rule divides your after-tax income into three
               categories:
@@ -99,6 +104,106 @@ export default function BudgetCalculatorPage() {
             <span className="opacity-60">Advertisement</span>
           </div>
         </div>
+
+        {/* Understanding the 50/30/20 Rule */}
+        <section className="mb-12 mt-14">
+          <div className="max-w-4xl mx-auto">
+            <h2
+              className="text-xl md:text-2xl text-gray-700 font-semibold text-center mb-6"
+            >
+              Understanding the 50/30/20 Rule
+            </h2>
+
+            <div className="prose prose-gray max-w-none">
+              <p className="text-gray-600 text-base md:text-lg leading-relaxed mb-6 text-center">
+                Created by Senator Elizabeth Warren, the 50/30/20 rule is one of
+                the most popular and effective budgeting strategies for building
+                financial stability and achieving your money goals.
+              </p>
+
+              <div className="grid md:grid-cols-3 gap-6 mb-8">
+                <div className="bg-blue-50 dark:bg-blue-900/20 p-6 rounded-lg border border-blue-200 dark:border-blue-800">
+                  <h3 className="text-lg font-semibold text-blue-700 dark:text-blue-300 mb-3">
+                    50% - Needs
+                  </h3>
+                  <p className="text-gray-600 dark:text-gray-300 text-sm leading-relaxed">
+                    Essential expenses you can't avoid: housing, utilities,
+                    groceries, transportation, minimum debt payments, insurance,
+                    and healthcare. These are your non-negotiable costs.
+                  </p>
+                </div>
+
+                <div className="bg-orange-50 dark:bg-orange-900/20 p-6 rounded-lg border border-orange-200 dark:border-orange-800">
+                  <h3 className="text-lg font-semibold text-orange-700 dark:text-orange-300 mb-3">
+                    30% - Wants
+                  </h3>
+                  <p className="text-gray-600 dark:text-gray-300 text-sm leading-relaxed">
+                    Lifestyle choices and discretionary spending: dining out,
+                    entertainment, hobbies, subscriptions, shopping, and travel.
+                    These enhance your quality of life but aren't essential.
+                  </p>
+                </div>
+
+                <div className="bg-green-50 dark:bg-green-900/20 p-6 rounded-lg border border-green-200 dark:border-green-800">
+                  <h3 className="text-lg font-semibold text-green-700 dark:text-green-300 mb-3">
+                    20% - Savings & Debt
+                  </h3>
+                  <p className="text-gray-600 dark:text-gray-300 text-sm leading-relaxed">
+                    Emergency fund, retirement contributions, extra debt
+                    payments, and long-term savings goals. This secures your
+                    financial future and provides peace of mind.
+                  </p>
+                </div>
+              </div>
+
+              <div className="bg-gray-50 dark:bg-gray-800 p-6 rounded-lg mb-6">
+                <h3
+                  className="text-lg font-semibold mb-3"
+                  style={{ color: "var(--title)" }}
+                >
+                  Why This Rule Works
+                </h3>
+                <ul className="text-gray-600 dark:text-gray-300 text-sm space-y-2">
+                  <li className="flex items-start">
+                    <span className="text-green-500 mr-2 mt-1">✓</span>
+                    <span>
+                      <strong>Simple to follow:</strong> Just three categories
+                      make budgeting less overwhelming
+                    </span>
+                  </li>
+                  <li className="flex items-start">
+                    <span className="text-green-500 mr-2 mt-1">✓</span>
+                    <span>
+                      <strong>Balanced approach:</strong> Covers essentials
+                      while allowing for enjoyment and future planning
+                    </span>
+                  </li>
+                  <li className="flex items-start">
+                    <span className="text-green-500 mr-2 mt-1">✓</span>
+                    <span>
+                      <strong>Flexible framework:</strong> Can be adjusted based
+                      on your income level and life circumstances
+                    </span>
+                  </li>
+                  <li className="flex items-start">
+                    <span className="text-green-500 mr-2 mt-1">✓</span>
+                    <span>
+                      <strong>Builds good habits:</strong> Automatically
+                      prioritizes saving and debt reduction
+                    </span>
+                  </li>
+                </ul>
+              </div>
+
+              <p className="text-gray-600 dark:text-gray-300 text-sm leading-relaxed text-center">
+                Remember, the 50/30/20 rule is a starting point. If your needs
+                exceed 50% of your income, focus on reducing expenses or
+                increasing income. The key is finding a sustainable balance that
+                works for your unique financial situation.
+              </p>
+            </div>
+          </div>
+        </section>
 
         {/* FAQ Section */}
         <FAQSection />

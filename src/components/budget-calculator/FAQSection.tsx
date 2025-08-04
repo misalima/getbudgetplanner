@@ -46,8 +46,7 @@ export default function FAQSection() {
         {/* Section Header */}
         <div className="text-center mb-6">
           <h2
-            className="text-2xl font-bold mb-2"
-            style={{ color: "var(--title)" }}
+            className="text-2xl font-semibold mb-2 text-gray-700"
           >
             Frequently Asked Questions
           </h2>
