@@ -63,7 +63,7 @@ const Header = () => {
                 <DropdownMenuContent>
                   {toolsLinks.map((tool) => (
                     <DropdownMenuItem key={tool.href} asChild>
-                      <Link href={tool.href} className="w-full block">
+                      <Link href={tool.href} className="cursor-pointer w-full block">
                         {tool.label}
                       </Link>
                     </DropdownMenuItem>
@@ -140,24 +140,10 @@ const Header = () => {
                 </Link>
               ))}
 
-              {/* Tools dropdown for mobile */}
-              <details>
-                <summary className="cursor-pointer px-3 py-2 text-primary-foreground/90 rounded-md hover:text-primary-foreground hover:bg-primary-foreground/10 font-medium transition-colors duration-200 transform hover:scale-105 hover:shadow-md hover:shadow-primary-foreground/30">
-                  Tools
-                </summary>
-                <div className="pl-4 mt-1 space-y-1">
-                  {toolsLinks.map((tool) => (
-                    <Link
-                      key={tool.href}
-                      href={tool.href}
-                      className="block px-3 py-2 text-primary-foreground/90 hover:text-primary-foreground hover:bg-primary-foreground/10 rounded-md transition-colors duration-200 font-medium transform hover:scale-105 hover:shadow-md hover:shadow-primary-foreground/30"
-                      onClick={() => setIsMenuOpen(false)}
-                    >
-                      {tool.label}
-                    </Link>
-                  ))}
-                </div>
-              </details>
+              {/* Tools button for mobile */}
+              <Link href="/tools" className="block px-3 py-2 text-primary-foreground/90 hover:text-primary-foreground hover:bg-primary-foreground/10 rounded-md transition-colors duration-200 font-medium transform hover:scale-105 hover:shadow-md hover:shadow-primary-foreground/30">
+                Tools
+              </Link>
             </div>
           </div>
         )}
