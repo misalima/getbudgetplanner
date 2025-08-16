@@ -10,9 +10,9 @@ const blogPosts: {
 
 export default function BlogPosts() {
   return (
-    <section className="bg-gray-50 py-16 md:py-32">
+    <section className="bg-gray-50 dark:bg-card/70 py-16 md:py-32">
       <div className="max-w-7xl mx-auto px-4">
-        <h3 className="text-3xl font-bold text-center mb-10 text-blue-800">Latest Blog Posts</h3>
+        <h3 className="text-3xl font-bold text-center mb-10 text-primary dark:text-foreground">Latest Blog Posts</h3>
         <div className={`grid grid-cols-1 gap-8 ${blogPosts.length > 0 ? "md:grid-cols-3" : ""}`}>
           {blogPosts.length > 0 ? (
             blogPosts.map((post) => (

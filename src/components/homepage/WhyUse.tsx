@@ -30,7 +30,7 @@ export default function WhyUse() {
   return (
     <section className="py-16 md:py-32">
       <div className="max-w-5xl mx-auto px-4">
-        <h3 className="text-3xl font-bold text-center mb-10 text-blue-800">Why Use My Budget Planner?</h3>
+        <h3 className="text-3xl font-bold text-center mb-10 text-primary dark:text-foreground">Why Use My Budget Planner?</h3>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8">
           {howItWorks.map((item) => (
             <Card key={item.title} className="flex flex-col items-center text-center">

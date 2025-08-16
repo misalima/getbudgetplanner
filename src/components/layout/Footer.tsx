@@ -9,12 +9,15 @@ const Footer = () => {
   };
 
   return (
-    <footer className="bg-slate-900 text-slate-200 p-6">
+    <footer className="bg-slate-900 dark:bg-background text-slate-200 p-6">
       {/* Navigation Menu (Home, Budget Calculator, About, Contact) using Next.js Link components. */}
       <nav>
         <ul className="flex flex-wrap justify-center gap-6 mb-4">
           <li>
             <Link href="/">Home</Link>
+          </li>
+          <li>
+            <Link href="/tools">Tools</Link>
           </li>
           <li>
             <Link href="/tools/budget-calculator">Budget Calculator</Link>

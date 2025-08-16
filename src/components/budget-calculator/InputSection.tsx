@@ -321,7 +321,7 @@ export default function InputSection({
     <section className="mb-8">
       <Card className="max-w-4xl mx-auto md:p-6 lg:py-10">
         <CardHeader className="pb-4">
-          <CardTitle className="text-2xl font-bold text-primary text-center">
+          <CardTitle className="text-2xl font-bold text-primary dark:text-foreground text-center">
             50/30/20 Calculator
           </CardTitle>
           <CardDescription className="text-center text-base mt-4">
@@ -340,7 +340,7 @@ export default function InputSection({
                 type="number"
                 placeholder="your income"
                 onChange={(e) => handleIncomeChange(e.target.value)}
-                className={`pl-12 py-6 text-gray-800 font-semibold text-center ${
+                className={`pl-12 py-6 text-muted-foreground font-semibold text-center ${
                   incomeError ? "border-red-500 focus:border-red-500" : ""
                 }`}
                 style={{ fontSize: "1.4rem" }}

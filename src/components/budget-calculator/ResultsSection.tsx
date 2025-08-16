@@ -230,7 +230,7 @@ export default function ResultsSection({
                       className="w-4 h-4 rounded-full"
                       style={{ backgroundColor: category.color }}
                     />
-                    <span className="font-semibold text-lg">
+                    <span className="font-semibold text-lg text-foreground">
                       {category.name}
                     </span>
                   </div>
@@ -246,7 +246,7 @@ export default function ResultsSection({
                       <div className="text-xs text-muted-foreground uppercase tracking-wide">
                         Recommended
                       </div>
-                      <div className="font-semibold text-lg">
+                      <div className="font-semibold text-lg text-accent-foreground">
                         {formatCurrency(recommended)}
                       </div>
                       <div className="text-xs text-muted-foreground">

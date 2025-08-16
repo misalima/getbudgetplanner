@@ -29,7 +29,7 @@ export default function BudgetCalculatorPage() {
           >
             Budget Calculator (50/30/20 Rule)
           </h1>
-          <p className="text-base md:text-lg text-gray-600 max-w-2xl mx-auto">
+          <p className="text-base md:text-lg text-muted-foreground max-w-2xl mx-auto">
             Easily split your income into needs, wants, and savings. Get instant
             insights and take control of your money.
           </p>
@@ -51,13 +51,13 @@ export default function BudgetCalculatorPage() {
             >
               How It Works
             </h2>
-            <p className="text-gray-600 text-sm md:text-base leading-relaxed mb-4">
+            <p className="text-muted-foreground text-sm md:text-base leading-relaxed mb-4">
               Take control of your finances with our simple budget calculator.
               Just enter your monthly income, and we&apos;ll instantly show you
               how to allocate your money using the proven 50/30/20 budgeting
               method.
             </p>
-            <p className="text-gray-600 text-sm md:text-base leading-relaxed">
+            <p className="text-muted-foreground text-sm md:text-base leading-relaxed">
               The 50/30/20 rule divides your after-tax income into three
               categories:
               <span className="font-medium text-blue-600">
@@ -108,12 +108,12 @@ export default function BudgetCalculatorPage() {
         {/* Understanding the 50/30/20 Rule */}
         <section className="mb-12 mt-14">
           <div className="max-w-4xl mx-auto">
-            <h2 className="text-xl md:text-2xl text-gray-700 font-semibold text-center mb-6">
+            <h2 className="text-xl md:text-2xl text-title font-semibold text-center mb-6">
               Understanding the 50/30/20 Rule
             </h2>
 
             <div className="prose prose-gray max-w-none">
-              <p className="text-gray-600 text-base md:text-lg leading-relaxed mb-6 text-center">
+              <p className="text-muted-foreground text-base md:text-lg leading-relaxed mb-6 text-center">
                 Created by Senator Elizabeth Warren, the 50/30/20 rule is one of
                 the most popular and effective budgeting strategies for building
                 financial stability and achieving your money goals.

@@ -9,7 +9,7 @@ import NewsletterSignup from "@/components/homepage/NewsletterSignup";
 export default function Page() {
   const isNewsletterEnabled = false; 
   return (
-    <div className="bg-white">
+    <div className="bg-background">
       <Hero />
       <Calculators />
       <HowItWorks />

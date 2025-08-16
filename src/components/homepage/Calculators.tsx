@@ -37,9 +37,9 @@ const calculators = [
 
 export default function Calculators() {
   return (
-    <section id="calculators" className="bg-gray-50 py-16 md:py-32">
+    <section id="calculators" className="bg-gray-50 dark:bg-card/70 py-16 md:py-32">
       <div className="max-w-7xl mx-auto px-4">
-        <h3 className="text-3xl font-bold text-center mb-10 text-blue-800">Featured Calculators</h3>
+        <h3 className="text-3xl font-bold text-center mb-10 text-primary dark:text-foreground">Featured Calculators</h3>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8">
           {calculators.map((calc) => (
             <Card key={calc.name} className="flex flex-col items-center text-center">
