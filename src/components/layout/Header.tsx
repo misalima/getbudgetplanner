@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { Menu, X, Moon, Sun } from "lucide-react";
@@ -22,8 +22,14 @@ const toolsLinks = [
 ];
 
 const Header = () => {
+
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isDarkMode, setIsDarkMode] = useState(false);
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
@@ -37,15 +43,15 @@ const Header = () => {
   return (
     <header className="sticky top-0 z-50 w-full border-b border-border/40 bg-primary backdrop-blur supports-[backdrop-filter]:bg-primary/95">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex h-16 items-center justify-between">
+        <div className="flex h-18 items-center justify-between">
           {/* Logo */}
           <Link href="/" className="flex items-center space-x-2">
             <Image
               src="/logo-side.png"
               alt="My Budget Planner"
-              width={180}
-              height={48}
-              className="h-12 w-auto"
+              width={220}
+              height={60}
+              className="h-14 w-auto"
               priority
             />
           </Link>
@@ -83,33 +89,37 @@ const Header = () => {
             </nav>
 
             {/* Theme Toggle */}
-            <button
-              onClick={toggleTheme}
-              className="p-2 hover:cursor-pointer rounded-md text-primary-foreground/90 transition-colors duration-200 hover:bg-primary-foreground/10 hover:scale-105 hover:shadow-md"
-              aria-label="Toggle theme"
-            >
-              {isDarkMode ? (
-                <Sun className="h-5 w-5" />
-              ) : (
-                <Moon className="h-5 w-5" />
-              )}
-            </button>
+            {mounted && (
+              <button
+                onClick={toggleTheme}
+                className="p-2 hover:cursor-pointer rounded-md text-primary-foreground/90 transition-colors duration-200 hover:bg-primary-foreground/10 hover:scale-105 hover:shadow-md"
+                aria-label="Toggle theme"
+              >
+                {isDarkMode ? (
+                  <Sun className="h-5 w-5" />
+                ) : (
+                  <Moon className="h-5 w-5" />
+                )}
+              </button>
+            )}
           </div>
 
           {/* Mobile Menu Button */}
           <div className="md:hidden flex items-center space-x-4">
             {/* Theme Toggle */}
-            <button
-              onClick={toggleTheme}
-              className="p-2 rounded-md text-primary-foreground/90 transition-colors duration-200 hover:bg-primary-foreground/10 hover:scale-105 hover:shadow-md"
-              aria-label="Toggle theme"
-            >
-              {isDarkMode ? (
-                <Sun className="h-5 w-5" />
-              ) : (
-                <Moon className="h-5 w-5" />
-              )}
-            </button>
+            {mounted && (
+              <button
+                onClick={toggleTheme}
+                className="p-2 rounded-md text-primary-foreground/90 transition-colors duration-200 hover:bg-primary-foreground/10 hover:scale-105 hover:shadow-md"
+                aria-label="Toggle theme"
+              >
+                {isDarkMode ? (
+                  <Sun className="h-5 w-5" />
+                ) : (
+                  <Moon className="h-5 w-5" />
+                )}
+              </button>
+            )}
 
             <button
               onClick={toggleMenu}
