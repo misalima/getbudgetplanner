@@ -1,10 +1,20 @@
-export default function Home() {
+"use client"
+
+import Hero from "@/components/homepage/Hero";
+import Calculators from "@/components/homepage/Calculators";
+import HowItWorks from "@/components/homepage/WhyUse";
+import BlogPosts from "@/components/homepage/BlogPosts";
+import NewsletterSignup from "@/components/homepage/NewsletterSignup";
+
+export default function Page() {
+  const isNewsletterEnabled = false; 
   return (
-    <div className="min-h-screen flex items-center justify-center">
-      <div className="text-center">
-        <h1 className="text-4xl font-bold mb-4">Hello World</h1>
-        <p className="text-gray-600">Welcome to My Budget Planner</p>
-      </div>
+    <div className="bg-background">
+      <Hero />
+      <Calculators />
+      <HowItWorks />
+      <BlogPosts />
+      {isNewsletterEnabled && <NewsletterSignup />}
     </div>
   );
 }
