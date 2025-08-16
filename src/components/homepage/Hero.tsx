@@ -1,5 +1,6 @@
 "use client"
 import React from "react";
+import Image from "next/image";
 import { Button } from "@/components/ui/button";
 
 function scrollToCalculators() {
@@ -22,11 +23,13 @@ export default function Hero() {
         </Button>
       </div>
       <div className="flex-1 flex justify-center">
-        <img
-          src="./home.png"
+        <Image
+          src="/home.png"
           alt="Finance illustration"
+          width={400}
+          height={400}
           className="w-150 max-w-full"
-          loading="lazy"
+          priority={false}
         />
       </div>
     </section>
